@@ -120,6 +120,11 @@ public class App {
 		de.komoot.photon.elasticsearch.Importer importer = new de.komoot.photon.elasticsearch.Importer(esNodeClient, args.getLanguages());
 		NominatimConnector nominatimConnector = new NominatimConnector(args.getHost(), args.getPort(), args.getDatabase(), args.getUser(), args.getPassword());
 		nominatimConnector.setImporter(importer);
+		
+		if(nominatimConnector == null){
+			log.info("--------------connection failed-------------");
+		}
+		
 		try {
 			nominatimConnector.readEntireDatabase();
 		} catch(Exception e) {
